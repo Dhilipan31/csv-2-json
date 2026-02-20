@@ -6,8 +6,6 @@ public class CsvParser {
 
     public void parser(String filePath, String writePath) throws IOException {
 
-        List<Map<String, String>> records = new ArrayList<>();
-
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         BufferedWriter bw = new BufferedWriter(new FileWriter(writePath));
 
@@ -16,15 +14,13 @@ public class CsvParser {
         if (header == null) return;
 
         List<String> headers = parseLine(header);
-
         String line = br.readLine();
         bw.write("[\n");
-        StringBuilder json = new StringBuilder();
         boolean firstRecord = true;
 
         while (line != null) {
 
-            if(!firstRecord){
+            if (!firstRecord) {
                 bw.write(",\n");
             }
             List<String> values = parseLine(line);
